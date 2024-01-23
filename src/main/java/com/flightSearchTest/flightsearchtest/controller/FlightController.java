@@ -1,26 +1,28 @@
 package com.flightSearchTest.flightsearchtest.controller;
 
 import com.flightSearchTest.flightsearchtest.Entities.Flight;
-import com.flightSearchTest.flightsearchtest.service.IFlightService;
+import com.flightSearchTest.flightsearchtest.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+
 
 @RestController
 public class FlightController {
 
-    private final IFlightService flightService;
+    private final FlightService flightService;
 
     @Autowired
-    public FlightController(IFlightService flightService) {
+    public FlightController(FlightService flightService) {
         this.flightService = flightService;
     }
 
 
     @GetMapping("/flights")
-    public List<Flight> get() {
-        return flightService.getAll();
+    public Iterable<Flight> get() {
+        return flightService.findAll();
     }
 
     @PostMapping("/add")
@@ -30,18 +32,18 @@ public class FlightController {
 
     @PostMapping("/update")
     public void update(@RequestBody Flight flight) {
-        flightService.update(flight);
+       // flightService.update(flight);
     }
 
-    @DeleteMapping("/delete")
-    public void delete(@RequestBody Flight flight) {
-        flightService.delete(flight);
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable Long id) {
+
     }
 
     @GetMapping("/flights/{id}")
     public Flight getById(@PathVariable long id) {
         Flight flight = flightService.getById(id);
-        System.out.println(flight.getArrivalAirport() + " " + flight.getDepartureAirport());
+        if (flight == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return flight;
     }
 }

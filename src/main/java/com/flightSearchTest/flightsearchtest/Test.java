@@ -1,5 +1,6 @@
 package com.flightSearchTest.flightsearchtest;
 
+import com.flightSearchTest.flightsearchtest.DataAccess.FlightRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -8,10 +9,21 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class Test implements CommandLineRunner {
 
+
+    FlightRepository flightRepository;
+
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Project Started.");
-        log.info("Çalış");
+
+        //findAll
+
+//        for (Flight flight : flightRepository.findAll()) {
+//            System.out.println(flight.toString());
+//        }
+
+
+
+
 
     }
 

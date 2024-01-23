@@ -18,9 +18,7 @@ public class Flight {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "departure_airport_id", nullable = false)
@@ -36,14 +34,18 @@ public class Flight {
 //    @Column(name = "arrivalAirport")
 //    private String arrivalAirport;
 
-
-    @Column(name = "departureTime")
+    @Column(name = "departure_time")
     private LocalDateTime departureTime;
 
-    @Column(name = "arrivalTime")
+    @Column(name = "arrival_time")
     private LocalDateTime arrivalTime;
 
     @Column(name = "price")
     private double price;
+
+    public String toString() {
+        return id + " " + departureAirport + " " + arrivalAirport
+                + " " + departureTime + " " +  arrivalTime + " " + price;
+    }
 
 }
