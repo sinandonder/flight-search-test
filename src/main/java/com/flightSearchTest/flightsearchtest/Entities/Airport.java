@@ -16,7 +16,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "airport")
-
 public class Airport {
     @Id
     @Column(name = "id")

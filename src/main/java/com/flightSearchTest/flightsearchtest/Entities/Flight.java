@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,32 +21,24 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "departure_airport_id", nullable = false)
-    private Airport departureAirport;
+    @Column(name = "departure_airport")
+    private String departureAirport;
 
-    @ManyToOne
-    @JoinColumn(name = "arrival_airport_id", nullable = false)
-    private Airport arrivalAirport;
+    @Column(name = "arrival_airport")
+    private String arrivalAirport;
 
-//    @Column(name = "departureAirport")
-//    private String departureAirport;
-//
-//    @Column(name = "arrivalAirport")
-//    private String arrivalAirport;
+    @Column(name = "departure_date_time")
+    private LocalDateTime departureDateTime;
 
-    @Column(name = "departure_time")
-    private LocalDateTime departureTime;
-
-    @Column(name = "arrival_time")
-    private LocalDateTime arrivalTime;
+    @Column(name = "arrival_date_time")
+    private LocalDateTime arrivalDateTime;
 
     @Column(name = "price")
-    private double price;
+    private Double price;
 
     public String toString() {
         return id + " " + departureAirport + " " + arrivalAirport
-                + " " + departureTime + " " +  arrivalTime + " " + price;
+                + " " + departureDateTime + " " +  arrivalDateTime + " " + price;
     }
 
 }

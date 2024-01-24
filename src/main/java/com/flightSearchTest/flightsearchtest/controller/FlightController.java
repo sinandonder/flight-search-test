@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.util.List;
 
 
 @RestController
@@ -26,8 +28,8 @@ public class FlightController {
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Flight flight) {
-        flightService.add(flight);
+    public Flight add(@RequestBody Flight flight) {
+        return flightService.add(flight);
     }
 
     @PostMapping("/update")
@@ -37,7 +39,7 @@ public class FlightController {
 
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
-
+        flightService.delete(id);
     }
 
     @GetMapping("/flights/{id}")
@@ -46,4 +48,23 @@ public class FlightController {
         if (flight == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return flight;
     }
+
+
+    @GetMapping("/searchFlights")
+    public List<Flight> searchFlights(
+            @RequestParam String departureAirport,
+            @RequestParam String arrivalAirport,
+            @RequestParam String departureDate) {
+        // LocalDateTime.parse(departureDateTime) kullanarak String'i LocalDateTime'a çevir
+        return flightService.searchFlights(departureAirport, arrivalAirport, LocalDate.parse(departureDate));
+    }
+
+
+    @GetMapping("/searchFlightsByDate")
+    public List<Flight> searchFlightsByDate(@RequestParam String departureDate) {
+        System.out.println(departureDate);
+        return flightService.searchByDate(LocalDate.parse(departureDate));
+
+    }
+
 }
