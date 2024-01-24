@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +21,10 @@ public class Flight {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+    @Type(value = AirportType.class)
+    private Airport airport;
 
     @Column(name = "departure_airport")
     private String departureAirport;
