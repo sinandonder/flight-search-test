@@ -1,0 +1,91 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.blur-background {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    z-index: -1;
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+
+    height: 100vh;
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+/* footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+} */
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+
+    .row.content {
+        height: auto;
+    }
+}
+
+.main-container {
+
+    margin: 5px;
+    border-radius: 25px;
+
+}
+
+ul {
+    border-radius: 15px;
+}
+
+.list {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    min-height: 650px;
+
+}
+
+li {
+    line-height: 5;
+    height: 120px;
+    border-radius: 15px;
+}
+
+.price {
+    background-color: green;
+    margin: 0;
+    font-size: 1em;
+}
+
+.bar {
+    background-color: rgba(255, 255, 255, 0.8);
+}

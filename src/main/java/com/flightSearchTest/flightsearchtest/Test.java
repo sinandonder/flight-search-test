@@ -61,11 +61,11 @@ public class Test implements CommandLineRunner {
 //        }
 
 
-        List<Flight> flights = apiService.fetchDataFromApi();
-
-
-        for (Flight flight : flights)
-            System.out.println(flight.getDepartureAirport() + " " + flight.getArrivalAirport());
+//        List<Flight> flights = apiService.fetchDataFromApi();
+//
+//
+//        for (Flight flight : flights)
+//            System.out.println(flight.getDepartureAirport() + " " + flight.getArrivalAirport());
 
 
 

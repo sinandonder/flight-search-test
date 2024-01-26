@@ -16,7 +16,7 @@ public class FlightService {
         this.flightRepository = flightRepository;
     }
 
-    public Iterable<Flight> findAll() {
+    public List<Flight> findAll() {
         return this.flightRepository.findAll();
     }
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.ui.Model;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,7 +22,6 @@ public class FlightController {
         this.flightService = flightService;
     }
 
-
     @GetMapping("/flights")
     public Iterable<Flight> get() {
         return flightService.findAll();
@@ -32,11 +30,6 @@ public class FlightController {
     @PostMapping("/add")
     public Flight add(@RequestBody Flight flight) {
         return flightService.add(flight);
-    }
-
-    @PostMapping("/update")
-    public void update(@RequestBody Flight flight) {
-       // flightService.update(flight);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -51,7 +44,6 @@ public class FlightController {
         return flight;
     }
 
-
     @GetMapping("/searchFlights")
     public List<Flight> searchFlights(
             @RequestParam String departureAirport,
@@ -61,18 +53,10 @@ public class FlightController {
         return flightService.searchFlights(departureAirport, arrivalAirport, LocalDate.parse(departureDate));
     }
 
-
     @GetMapping("/searchFlightsByDate")
     public List<Flight> searchFlightsByDate(@RequestParam String departureDate) {
         System.out.println(departureDate);
         return flightService.searchByDate(LocalDate.parse(departureDate));
-    }
-
-    @GetMapping("/hello")
-    public String hello(Model model) {
-        model.addAttribute("message", "Merhaba, Dünya!");
-
-        return "start";
     }
 
 }

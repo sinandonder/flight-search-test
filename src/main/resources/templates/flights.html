@@ -5,86 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/ajax/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        .blur-background {
-            margin: 0;
-            padding: 0;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: url('../images/background.jpg');
-            background-size: cover;
-            background-position: center;
-            filter: blur(8px);
-            z-index: -1;
-        }
-
-        /* Remove the navbar's default margin-bottom and rounded borders */
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-
-        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {
-
-            height: 100vh;
-        }
-
-        /* Set gray background color and 100% height */
-        .sidenav {
-            padding-top: 20px;
-            background-color: #f1f1f1;
-            height: 100%;
-        }
-
-        /* Set black background color, white text and some padding */
-        /* footer {
-          background-color: #555;
-          color: white;
-          padding: 15px;
-        } */
-
-        /* On small screens, set height to 'auto' for sidenav and grid */
-        @media screen and (max-width: 767px) {
-            .sidenav {
-                height: auto;
-                padding: 15px;
-            }
-            .row.content {height:auto;}
-        }
-
-        .main-container {
-
-            margin: 5px;
-            border-radius: 25px;
-
-        }
-
-        .list {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            min-height: 350px;
-
-        }
-
-        li {
-            line-height: 5;
-        }
-    </style>
+    <link rel="stylesheet" href="/style/flights.css">
 </head>
 <body>
 <div class="blur-background"></div>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-light bar">
 
     <div class="container-fluid">
         <div class="navbar-header">
@@ -93,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" href="#">Uçuş Ara</a>
         </div>
     </div>
 
@@ -110,11 +37,32 @@
             <h1><span th:text="${departure} + ' '"></span>&#8594;<span th:text="' ' + ${arrival}"></span></h1>
             <h2 th:text="${dateTitle}">Tarih</h2>
             <hr>
-            <h3>Uçuş Listesi</h3>
+            <!-- <h3>Uçuş Listesi</h3> -->
             <!-- Listeyi Kontrol Et -->
             <ul th:if="${dataList != null && not #lists.isEmpty(dataList)}" class="list-group">
-                <li class="list-group-item active">Bulunan Uçuşlar</li>
-                <li th:each="item : ${dataList}" th:text="${item}" class="list-group-item"></li>
+
+
+
+                <li class="list-group-item active"><h1 class="display-1">Uçuşlar</h1></li>
+
+                <li th:each="flight : ${dataList}" class="list-group-item d-flex justify-content-between align-items-center">
+
+                    <span th:text="${flight.getDepartureDateTime().toLocalDate()}" class="badge badge-primary badge-pill">14.01.2024</span>
+
+                    <h4><strong>
+                        <span th:text="${flight.getDepartureAirport()} + ' '">Ankara Esenboğa Havalimanı</span>
+                        <span>&#8594;</span>
+                        <span th:text="' ' + ${flight.getArrivalAirport()}">İstanbul Havalimanı</span> </strong>
+                    </h4>
+
+                    <h4>
+                        <span th:text="${flight.getDepartureDateTime().getHour()} + ':' + ${flight.getDepartureDateTime().getMinute()} + ' '">14:00</span>
+                        <span>&#8674;</span>
+                        <span th:text="' ' + ${flight.getArrivalDateTime().getHour()} + ':' + ${flight.getArrivalDateTime().getMinute()}">15:00</span>
+                    </h4>
+
+                    <span th:text="${flight.getPrice()}" class="badge badge-pill badge-success price">1290 &#8378;</span>
+                </li>
             </ul>
 
 

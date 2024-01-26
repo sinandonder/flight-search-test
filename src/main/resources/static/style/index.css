@@ -14,7 +14,7 @@ body {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: url('../images/background.jpg');
+    background: url('/images/background.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(5px);
@@ -26,12 +26,19 @@ body {
     justify-content: space-between;
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0px;
     z-index: 1;
 }
 
 .col {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8); /* Arkaplan rengini ayarlayın */
     padding: 30px;
     border-radius: 10px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 50pt;
 }

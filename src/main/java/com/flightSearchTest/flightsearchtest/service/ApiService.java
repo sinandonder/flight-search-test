@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class ApiService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    @Value("${api.url}")
+    @Value("${mock.api.url}")
     private String apiUrl;
 
     public List<Flight> fetchDataFromApi() {
@@ -28,12 +28,13 @@ public class ApiService {
         try {
             flightsArray = restTemplate.getForObject(apiUrl, Flight[].class);
         } catch (RestClientException exception) {
-            System.out.println("Api' dan gelen veriler bozuk veya okunamıyor.");
+            System.out.println("[ERROR] The data coming from the API is corrupt or the connection cannot be " +
+                    "established with the API. Database Not Updated!");
         }
 
 
         if (flightsArray == null)
-            return new ArrayList<>();
+            return null;
 
         return Arrays.asList(flightsArray);
     }

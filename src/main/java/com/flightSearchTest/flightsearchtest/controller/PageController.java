@@ -24,7 +24,7 @@ public class PageController {
     @GetMapping("/")
     public String homePage(Model model) {
         LocalDate localDate = LocalDate.now();
-        model.addAttribute("message", "Merhaba, Dünya!");
+
         model.addAttribute("today", localDate);
         model.addAttribute("maxYear", localDate.plusYears(1));
 
@@ -43,14 +43,25 @@ public class PageController {
         String departure = StringUtils.capitalize(departureAirport);
         String arrival = StringUtils.capitalize(arrivalAirport);
 
-
-
-
         model.addAttribute("dataList", flights);
         model.addAttribute("pageTitle", departure + " " + arrival + " Uçuşları");
         model.addAttribute("departure", departure);
         model.addAttribute("arrival", arrival);
         model.addAttribute("dateTitle", departureDate);
+
+        return "flights";
+    }
+
+    @GetMapping("all-flights")
+    public String allFlights(Model model) {
+
+        List<Flight> flights = flightService.findAll();
+
+        model.addAttribute("dataList", flights);
+        model.addAttribute("pageTitle", "Tüm Uçuşlar");
+        model.addAttribute("departure", "Tüm");
+        model.addAttribute("arrival", "Tüm");
+        model.addAttribute("dateTitle", "Tüm Zamanlar");
 
         return "flights";
     }

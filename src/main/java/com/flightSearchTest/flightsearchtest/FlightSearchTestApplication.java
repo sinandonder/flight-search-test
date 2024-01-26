@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableScheduling // Scheduled Backgroud Job' lari etkinleştirmek için gerekli anotasyon
+@EnableScheduling // Scheduled Background Jobs Enabled
 public class FlightSearchTestApplication {
 
 	public static void main(String[] args) {
