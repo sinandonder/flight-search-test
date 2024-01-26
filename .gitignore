@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#bootStrap
+src/main/resources/public/css
+src/main/resources/public/js

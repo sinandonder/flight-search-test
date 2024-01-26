@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title th:text="${pageTitle}">Uçuş Arama Sonuçları</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .blur-background {
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('../images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+
+            height: 100vh;
+        }
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        /* footer {
+          background-color: #555;
+          color: white;
+          padding: 15px;
+        } */
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+            .row.content {height:auto;}
+        }
+
+        .main-container {
+
+            margin: 5px;
+            border-radius: 25px;
+
+        }
+
+        .list {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            min-height: 350px;
+
+        }
+
+        li {
+            line-height: 5;
+        }
+    </style>
+</head>
+<body>
+<div class="blur-background"></div>
+<nav class="navbar navbar-inverse">
+
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Logo</a>
+        </div>
+    </div>
+
+</nav>
+
+<div class="container-fluid text-center main-container rounded">
+    <div class="row content rounded">
+        <div class="col-sm-2"> <!--sidenav-->
+            <!-- <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p> -->
+        </div>
+        <div class="col-sm-8 text-center list">
+            <h1><span th:text="${departure} + ' '"></span>&#8594;<span th:text="' ' + ${arrival}"></span></h1>
+            <h2 th:text="${dateTitle}">Tarih</h2>
+            <hr>
+            <h3>Uçuş Listesi</h3>
+            <!-- Listeyi Kontrol Et -->
+            <ul th:if="${dataList != null && not #lists.isEmpty(dataList)}" class="list-group">
+                <li class="list-group-item active">Bulunan Uçuşlar</li>
+                <li th:each="item : ${dataList}" th:text="${item}" class="list-group-item"></li>
+            </ul>
+
+
+            <!-- Liste boşsa -->
+            <div th:unless="${dataList != null && not #lists.isEmpty(dataList)}" class="alert alert-warning">
+                <strong>Üzgünüz, bu tarih için herhangi bir uçuş bulunamadı!</strong>
+            </div>
+
+        </div>
+        <div class="col-sm-2"> <!--sidenav-->
+            <!-- <div class="well">
+              <p>ADS</p>
+            </div>
+            <div class="well">
+              <p>ADS</p>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- <footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer> -->
+
+</body>
+</html>
