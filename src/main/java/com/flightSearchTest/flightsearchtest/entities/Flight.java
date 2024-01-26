@@ -1,4 +1,4 @@
-package com.flightSearchTest.flightsearchtest.Entities;
+package com.flightSearchTest.flightsearchtest.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
