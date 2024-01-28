@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.StringUtils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -43,11 +44,17 @@ public class PageController {
         String departure = StringUtils.capitalize(departureAirport);
         String arrival = StringUtils.capitalize(arrivalAirport);
 
+        LocalDate date = LocalDate.parse(departureDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, EEEE");
+
+        String formattedDate = date.format(formatter);
+
+
         model.addAttribute("dataList", flights);
         model.addAttribute("pageTitle", departure + " " + arrival + " Uçuşları");
         model.addAttribute("departure", departure);
         model.addAttribute("arrival", arrival);
-        model.addAttribute("dateTitle", departureDate);
+        model.addAttribute("dateTitle", formattedDate);
 
         return "flights";
     }

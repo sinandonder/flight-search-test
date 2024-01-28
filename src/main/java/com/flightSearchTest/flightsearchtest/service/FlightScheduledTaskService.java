@@ -20,8 +20,8 @@ public class FlightScheduledTaskService{
         this.apiService = apiService;
     }
 
-    //@Scheduled(fixedRate = 600000) // in ms
-    @Scheduled(cron = "0 0 1 * * ?") // every day 01:00
+    @Scheduled(fixedRate = 600000) // in ms
+    //@Scheduled(cron = "0 0 1 * * ?") // every day 01:00
     public void fetchFlightsAndUpdateRepository() {
 
         List<Flight> flights = apiService.fetchDataFromApi();

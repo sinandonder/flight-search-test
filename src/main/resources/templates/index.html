@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/style/index.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <title th:text="${pageTitle}">Uçuş Ara</title>
-    <script src="/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 <div class="blur-background"></div>
@@ -22,12 +27,13 @@
             <form action="http://localhost:8080/searchFlights">
                 <div class="row">
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="departureAirport" name="departureAirport"
+                        <input type="text" class="airport-search form-control" id="departureAirport"
+                               name="departureAirport"
                                placeholder="Nereden?">
                     </div>
 
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="arrivalAirport" name="arrivalAirport"
+                        <input type="text" class="airport-search form-control" id="arrivalAirport" name="arrivalAirport"
                                placeholder="Nereye?">
                     </div>
 
@@ -41,11 +47,63 @@
                 </div>
             </form>
 
+
         </div>
     </div>
     <div class="col-md-1">
 
     </div>
 </div>
+
+<script>
+
+
+    $(document).ready(function () {
+        function fetchAirportData(callback) {
+
+            // JSONPlaceholder API'den örnek havaalanı verilerini çekme
+            $.getJSON("http://localhost:8080/api/airport/airports", function (data) {
+
+                // API'den gelen verileri uygun formata dönüştürme
+                var airportData = data.map(function (item) {
+                    return {
+                        label: item.name, // Havaalanı adı
+                        airport_city: item.city
+                    };
+                });
+                callback(airportData);
+            });
+        }
+
+        $(".airport-search").autocomplete({
+            source: function (request, response) {
+                var term = request.term.toLowerCase();
+                fetchAirportData(function (airportData) {
+                    var filteredAirports = airportData.filter(function (airport) {
+                        return airport.label.toLocaleLowerCase().includes(term) || airport.airport_city.toLocaleLowerCase().includes(term);
+                    });
+                    console.log(filteredAirports);
+                    response(filteredAirports);
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+
+                // Kullanıcı bir öneriyi seçtiğinde yapılacak işlemler
+                console.log("Seçilen Havalimanı: " + ui.item.label);
+                $(this).val(ui.item.label); // Havalimanı adını input kutusuna set et
+                return false; // Formun submit olmasını engelle
+            },
+        }).on("autocompletechange", function (event, ui) {
+            // Kullanıcı bir öneri seçmediğinde veya seçimini temizlediğinde
+            if (!ui.item) {
+                $(this).val(""); // input kutusunu temizle
+                console.log("Lütfen bir konum seçin.");
+            }
+        });
+    });
+</script>
+
+
 </body>
 </html>

@@ -20,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Uçuş Ara</a>
+            <a class="navbar-brand" href="http://localhost:8080">Uçuş Ara</a>
         </div>
     </div>
 
@@ -43,7 +43,7 @@
 
 
 
-                <li class="list-group-item active"><h1 class="display-1">Uçuşlar</h1></li>
+                <li class="list-group-item active"><h1 class="display-1" th:text="${dateTitle} + ' Uçuşları'">Uçuşlar</h1></li>
 
                 <li th:each="flight : ${dataList}" class="list-group-item d-flex justify-content-between align-items-center">
 

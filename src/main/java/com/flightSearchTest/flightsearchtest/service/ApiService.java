@@ -20,7 +20,7 @@ public class ApiService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    @Value("${mock.api.url}")
+    @Value("${api.url}")
     private String apiUrl;
 
     public List<Flight> fetchDataFromApi() {
